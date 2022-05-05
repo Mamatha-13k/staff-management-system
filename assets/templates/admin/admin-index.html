@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Staff Management System</title>
+    <link rel="stylesheet" href="{% static 'admin/vendors/mdi/css/materialdesignicons.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'admin/vendors/flag-icon-css/css/flag-icon.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/vendors/css/vendor.bundle.base.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/vendors/font-awesome/css/font-awesome.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/css/style.css' %}"/>
+    <link rel="shortcut icon" href="{% static 'admin/images/favicon.png'%}" />
+    <link rel="stylesheet" href="{% static 'admin/css/' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  </head>
+  <body>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+     <script> swal({
+            title:"Success:)",
+            text:"login successful",
+            icon:"success",
+            button:"ok",  
+     });
+   </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <div class="container-scroller">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      
+      <div class="text-center sidebar-brand-wrapper d-flex align-self-center">
+        <a style="background-color:whitesmoke;   width:100%;padding-right:30px;padding-top:20px;color:rgb(175, 29, 204);font-weight:bold;font-size:34px;font-family:monospace;" class=" brand-logo" href="{% url 'admin-index' %}"> 
+          <i class="mdi mdi-account mr-2 "></i>SM System
+        </a>
+        
+        <a style="background-color:whitesmoke;   width:100%;padding-top:20px;color:rgb(175, 29, 204);font-weight:bold;font-size:34px;font-family:monospace;" 
+        class=" brand-logo-mini" href="{% url 'admin-index' %}"><i class="mdi mdi-account "></i></a>
+
+      </div>
+
+
+
+
+    <ul class="nav">
+         
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'admin-index' %}">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view-managers' %}">
+              <i class="mdi mdi-book-open menu-icon"></i>
+              <span class="menu-title">View managers</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view-staff' %}">
+              <i class="mdi mdi-book-search menu-icon"></i>
+              <span class="menu-title">View Staff</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin-login' %}">
+              <i class="mdi mdi-account menu-icon"></i>
+              <span class="menu-title">Signout</span>
+            </a>
+          </li>
+     
+        </ul> 
+      </nav>
+      <div class="container-fluid page-body-wrapper">
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close mdi mdi-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-default-theme">
+            <div class="img-ss rounded-circle bg-light border mr-3"></div> Default
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border mr-3"></div> Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles light"></div>
+            <div class="tiles dark"></div>
+          </div>
+        </div>
+        <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+          <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+          
+            <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+              <i class="mdi mdi-menu"></i>
+            </button>
+           
+            <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+              
+              <li class="nav-item nav-profile dropdown border-0">
+                <i  style="font-size:40px;color:aliceblue" class="mdi mdi-account"></i>
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
+                
+                  <span class="profile-name">Admin</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+                  
+                  <a class="dropdown-item" href="{% url 'home' %}">
+                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <div class="main-panel">
+          <div class="content-wrapper pb-0">
+            <div class="page-header flex-wrap">
+              
+              
+            </div>
+            <div class="row">
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-warning">
+                  <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">No.of Managers</p>
+                        <br>
+                        
+                        <h2 class="text-white">{{manager_count}}
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-warning"></i>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
+                <div class="card bg-primary">
+                  <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Total Staff</p>
+                        <br>
+                        <h2 class="text-white">{{staff_count}}
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
+                <div class="card bg-danger">
+                  <div class="card-body px-3 py-4">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <div class="color-card">
+                        <p class="mb-0 color-card-head">Total Departments</p>
+                        <br>
+                        <h2 class="text-white">4
+                        </h2>
+                      </div>
+                      <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+              
+              
+            </div>
+            <div class="row">
+              
+              <div class="col-xl-12 stretch-card grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-7">
+                        <h5>Details</h5>
+                        
+                        </p>
+                      </div>
+                     
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="card mb-3 mb-sm-0">
+                          <div class="card-body py-3 px-4">
+                            <p class="m-0 survey-head">Total Managers</p>
+                            <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                              <div>
+                                <h3 class="m-0 survey-value"></h3>
+                                <a  href = "" class="text-success m-0">view Managers</a>
+                              </div>
+                              <div id="earningChart" class="flot-chart"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="card mb-3 mb-sm-0">
+                          <div class="card-body py-3 px-4">
+                            <p class="m-0 survey-head">Registered Staff</p>
+                            <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                              <div>
+                                <h3 class="m-0 survey-value"></h3>
+                                <a  href = "" class="text-danger m-0">view Staff details</a>
+                              </div>
+                              <div id="productChart" class="flot-chart"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="card">
+                          <div class="card-body py-3 px-4">
+                            <p class="m-0 survey-head">Today Department</p>
+                            <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
+                              <div>
+                                <h3 class="m-0 survey-value">4</h3>
+                                <a  href = "" class="text-success m-0"></a>
+                              </div>
+                              <div id="orderChart" class="flot-chart"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row my-3">
+                      <div class="col-sm-12">
+                        <div class="flot-chart-wrapper">
+                          <div id="flotChart" class="flot-chart">
+                            <canvas class="flot-base"></canvas>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-8">
+                        <p class="text-muted mb-0"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. <b>Learn More</b>
+                        </p>
+                      </div>
+                      <div class="col-sm-4">
+                        <p class="mb-0 text-muted">STAFF MANGEMENT SYSTEM</p>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+              
+          
+         
+          <footer class="footer">
+            
+          </footer>
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'admin/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'admin/vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.categories.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.fillbetween.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.pie.js' %}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'admin/js/off-canvas.js' %}"></script>
+    <script src="{% static 'admin/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'admin/js/misc.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'admin/js/dashboard.js' %}"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

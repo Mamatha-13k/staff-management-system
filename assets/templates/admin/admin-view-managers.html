@@ -1,0 +1,345 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Staff Management System</title>
+    <link rel="stylesheet" href="{% static 'admin/vendors/mdi/css/materialdesignicons.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'admin/vendors/flag-icon-css/css/flag-icon.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/vendors/css/vendor.bundle.base.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/vendors/font-awesome/css/font-awesome.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'admin/css/style.css' %}"/>
+    <link rel="shortcut icon" href="{% static 'admin/images/favicon.png'%}" />
+    <link rel="stylesheet" href="{% static 'admin/css/' %}">
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      
+        <div class="text-center sidebar-brand-wrapper d-flex align-self-center">
+          <a style="background-color:whitesmoke;   width:100%;padding-right:30px;padding-top:20px;color:rgb(175, 29, 204);font-weight:bold;font-size:34px;font-family:monospace;" class=" brand-logo" href="{% url 'admin-index' %}"> 
+            <i class="mdi mdi-account mr-2 "></i>SM System
+          </a>
+          
+          <a style="background-color:whitesmoke;   width:100%;padding-top:20px;color:rgb(175, 29, 204);font-weight:bold;font-size:34px;font-family:monospace;" 
+          class=" brand-logo-mini" href="{% url 'admin-index' %}"><i class="mdi mdi-account "></i></a>
+  
+        </div>
+  
+  
+  
+        <ul class="nav">
+         
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'admin-index' %}">
+              <i class="mdi mdi-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view-managers' %}">
+              <i class="mdi mdi-book-open menu-icon"></i>
+              <span class="menu-title">View managers</span>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'view-staff' %}">
+              <i class="mdi mdi-book-search menu-icon"></i>
+              <span class="menu-title">View Staff</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin-login' %}">
+              <i class="mdi mdi-account menu-icon"></i>
+              <span class="menu-title">Signout</span>
+            </a>
+          </li>
+     
+        </ul> 
+        </nav>
+      <div class="container-fluid page-body-wrapper">
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close mdi mdi-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-default-theme">
+            <div class="img-ss rounded-circle bg-light border mr-3"></div> Default
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border mr-3"></div> Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles light"></div>
+            <div class="tiles dark"></div>
+          </div>
+        </div>
+        <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+          <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+          
+            <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+              <i class="mdi mdi-menu"></i>
+            </button>
+           
+            <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+              
+              <li class="nav-item nav-profile dropdown border-0">
+                <i  style="font-size:40px;color:aliceblue" class="mdi mdi-account"></i>
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
+                
+                  <span class="profile-name">Admin</span>
+                </a>
+                <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+                  
+                  <a class="dropdown-item" href="{% url 'home' %}">
+                    <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        
+
+        <div class="main-panel">
+            <div class="content-wrapper pb-0">
+              <div class="page-header flex-wrap">
+                
+                <div>
+                  <button type="button" class="btn btn-sm ml-3 btn-success">View Managers</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-sm-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body px-0 overflow-auto">
+                      
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead class="bg-light">
+                            <tr>
+                              <th>ID.NO</th>
+                                <th>Profile</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                
+                                <th>Department</th>
+                                <th>Status</th>
+                                <th>view</th>
+                                <th>Action</th>
+                                <th>Edit Here</th>
+                                <th>Delete</th>
+                            </tr>
+                            
+                          </thead>
+                          <tbody>
+                            {% for p in manager %}
+                           
+                            <tr>
+                              <td>{{ p.manager_id }}</td>
+                              <td class="py-1">
+                                <img src="media/{{ p.photo }}" alt="image" />
+                              </td>
+                              <td>{{ p.name }}</td>
+                              
+                              <td>{{ p.email }}</td>
+                              <td>{{ p.phone }}</td>
+                             
+                              <td>{{ p.department }}</td>
+                              <td>
+                                {% if p.status == 'Accepted' %}
+                               <h5 class="text-success">{{p.status}}</h5>
+                               {% elif p.status == 'Rejected' %}
+                               <h5 class="text-danger">{{p.status}}</h5>
+                               {% else %}
+                               <h5 class="text-info">{{p.status}}</h5>
+                               {% endif %}
+                              </td>
+                              <td> <a href="edit-manager/{{p.manager_id }}" class="badge badge-inverse-primary"> Edit here </a></td>
+                             
+                             
+                              <td>
+
+                        
+                                <div class="d-flex align-items-center">
+                                    <div style="margin:4px;background-color:rgb(72, 190, 190);width:30px;border-radius:40px;height:30px;display: flex;justify-content: center;align-items: center;">
+                                  
+                                        <i class="mdi mdi-eye" data-toggle="modal" data-target="#doctor_details{{p.manager_id}}" style="color:white;font-size:18px"></i>
+                                      </div> 
+                
+                                <div class="modal fade" id="doctor_details{{p.manager_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                                <div  style="background-color:white;padding:8px;border-radius:12px;">
+                                                    <h1 style="text-align:center;font-family:sans-serif;margin:8px;color:rgb(17, 8, 68);padding:0px;">Manager Details</h1>
+                                                    <div class="col-12" style="padding:0px">
+                                                    <hr>
+                                                </div>
+                                        <div class="row" style="display:flex;flex-direction:column;justify-content:space-around;">
+                                        
+                                        <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                        <h4 style="font-family:italic;color:rgb(89, 88, 92)">Full Name</h4>
+                                        <h4 style="font-family:italic;color:rgb(10, 46, 87)">{{p.name}}</h4>
+                                        
+                                        </div>
+                                        <div class="col-12">
+                                        <hr style="height:1px;margin:0px;">
+                                    </div>
+
+
+
+                                    <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                      <h4 style="font-family:italic;color:rgb(89, 88, 92)">Email</h4>
+                                      <h4 style="font-family:italic;color:rgb(10, 46, 87)">{{p.email}}</h4>
+                                      
+                                  </div>
+                                  <div class="col-12">
+                                    <hr style="height:1px;margin:0px;">
+                                </div>
+            
+                                <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                  <h4 style="font-family:italic;color:rgb(89, 88, 92)">Department</h4>
+                                  <h4 style="font-family:italic;color:rgb(10, 46, 87)">{{p.department}}</h4>
+                                  
+                              </div>
+                              <div class="col-12">
+                                  <hr style="height:1px;margin:0px;">
+                              </div>
+                
+                                    <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                        <h4 style="font-family:italic;color:rgb(89, 88, 92)">Contact Number</h4>
+                                        <h4 style="font-family:italic;color:rgb(10, 46, 87)">{{p.phone}}</h4>
+                                        
+                                    </div>
+                                    <div class="col-12">
+                                      <hr style="height:1px;margin:0px;">
+                                  </div>
+              
+                                    
+                            <div class="col-12" style="display:flex;justify-content:space-around;padding:8px">
+                                <h4 style="font-family:italic;color:rgb(89, 88, 92)">Status</h4>
+                                <h4 style="font-family:italic;color:rgb(10, 46, 87)">{{p.status}}</h4>
+                                
+                            </div>
+                            <div class="col-12">
+                            <hr style="height:1px;margin:0px;">
+                        </div>
+
+                       
+                      <div class="col-12">
+                      <hr style="height:1px;margin:0px;">
+                  </div>
+                
+                      
+
+                     
+                  
+
+
+                    
+                
+                     
+                              <div class="col-12">
+                                <hr style="height:1px;margin:0px;">
+                            </div>
+                             
+                              </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                  
+                                  </div>
+                              </div>
+                              </div>
+                                </div>
+                                  
+                                </div>
+                      </td>
+                              <td>
+                                <a href="accept-manager/{{p.manager_id }}" class="badge badge-inverse-success"> Accept </a>
+                                <a href="reject-manager/{{p.manager_id }}" class="badge badge-inverse-success"> Reject </a>
+                              </td>
+                              <td>   <a href="del-manager/{{p.manager_id }}" class="badge badge-inverse-success"> Delete </a></td>
+                           
+                             </tr>
+                        
+                            
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                
+                
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="row">
+                       <div class="col-6">
+                         <h1>Heading</h1>
+                       </div>
+                       <div class="col-6">
+                        <h1>Heading</h1>
+                      </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <footer class="footer">
+      
+            </footer>
+          </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'admin/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'admin/vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.categories.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.fillbetween.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'admin/vendors/flot/jquery.flot.pie.js' %}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'admin/js/off-canvas.js' %}"></script>
+    <script src="{% static 'admin/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'admin/js/misc.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'admin/js/dashboard.js' %}"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
